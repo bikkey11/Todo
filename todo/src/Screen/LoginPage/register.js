@@ -47,7 +47,8 @@ export const Register = () => {
           <span>Explore More by</span>
           <span>connecting with us</span>
         </div>
-        <div>
+       <form onSubmit={handleSubmit}>
+       <div className='flex justify-center p-2'>
           <label htmlFor="profile" className='cursor-pointer'>
             <img src={Profile} alt='h' className='w-20 bg-contain'></img>
             <input id='profile' name='profile' type="file" className='hidden' onChange={(e) => {
@@ -56,7 +57,7 @@ export const Register = () => {
           </label>
         </div>
         <div className=' grid grid-cols-1 md:grid-cols-2 gap-4'>
-          <input type='text' name='firstName' placeholder='First Name' className='p-2 border-2 rounded-xl focus:outline-none' onChange={handleChange} />
+          <input type='text' required name='firstName' placeholder='First Name' className='p-2 border-2 rounded-xl focus:outline-none' onChange={handleChange} />
           <input type='text' name='middleName' onChange={handleChange} placeholder='Middle Name' className='p-2 border-2 rounded-xl focus:outline-none' />
           <input type="text" placeholder='Last Name' name='lastName' onChange={handleChange} className='p-2 border-2 rounded-xl focus:outline-none' />
           <input type='email' placeholder='email' name='email' onChange={handleChange} className='p-2 border-2 rounded-xl focus:outline-none' />
@@ -65,10 +66,14 @@ export const Register = () => {
           <input type='number' placeholder='Phone' name='phone' onChange={handleChange} className='p-2 border-2 rounded-xl focus:outline-none' />
           <input type='password' placeholder='password' name='password' onChange={handleChange} className='p-2 border-2 rounded-xl focus:outline-none' />
         </div>
-
+        <div className='flex justify-center pt-2'>
         <button className='border-2 w-[200px] rounded-2xl bg-blue-600 text-white font-thin p-1'
-          onClick={handleSubmit}
+          // onClick={handleSubmit}
         >Sign Up</button>
+        </div>
+
+       
+       </form>
         <div className='text-sm font-thin'>
           <span>Already a user?  </span>
           <span className='cursor-pointer hover:text-blue-600 underline'

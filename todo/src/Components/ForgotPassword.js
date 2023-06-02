@@ -29,11 +29,17 @@ const ForgotPassword = () => {
                     onClick={submitHandler}
 
                 >Find User</button>
-                <span className='text-sm font-thin cursor-pointer text-red-600 hover:text-blue-700 hover:underline'>Login In Now </span>
+                <span
+                onClick={()=>{
+                    navigate("/login")
+                }}
+                className='text-sm font-thin cursor-pointer text-red-600 hover:text-blue-700 hover:underline'>Login In Now </span>
                 <div className='text-sm font-thin'>
                     <span>Not Registerd Yet?  </span>
                     <span className='cursor-pointer hover:text-blue-600 underline'
-
+                     onClick={()=>{
+                        navigate('/register')
+                     }}
                     >Sign Up</span>
                 </div>
 

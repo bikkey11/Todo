@@ -6,7 +6,6 @@ import { Store } from '../../Context/store';
 
 export const Navbar = () => {
   const navigate = useNavigate()
-  const [searchText, setSearchText] = useState("wdws");
   const [profileMenu, setProfileMenu] = useState("")
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -31,19 +30,12 @@ export const Navbar = () => {
         <span className="text-[16px]  text-center font-semibold leading-[52px] cursor-pointer hover:underline">To Do</span>
 
       </div>
-      <div>
-        <button className='bg-white text-navbar rounded-l-xl align-middle p-2 '
-          onClick={() => {
-            console.log(searchText)
-          }}
-        >
-          <AiOutlineSearch className=' text-2xl '></AiOutlineSearch>
-        </button>
-        <input type="text" placeholder='Search' className='md:w-[400px] w-0 rounded-r-xl align-middle p-2 focus:outline-none focus:text-black text-black'
-          onChange={(e) => { setSearchText(e.target.value) }}
-        />
-      </div>
-      <div className='flex items-center'>
+
+
+
+
+      <div className='flex items-center gap-2'>
+
         <div className='px-2 py-5 hover:bg-navHov cursor-pointer'>
           <AiOutlineSetting></AiOutlineSetting>
         </div>
@@ -62,6 +54,13 @@ export const Navbar = () => {
           </div>
           <div className=' border-2 rounded-full px-1 '>BY</div>
         </div>
+        <button className='bg-white text-navbar rounded-xl align-middle p-2 mr-3 '
+          onClick={() => {
+            navigate("/searchTodo")
+          }}
+        >
+          <AiOutlineSearch className=' text-2xl '></AiOutlineSearch>
+        </button>
 
 
       </div>
@@ -72,8 +71,11 @@ export const Navbar = () => {
         </div> : null
       }
 
+
     </div>
   )
 }
+
+
 
 

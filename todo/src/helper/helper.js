@@ -73,7 +73,7 @@ export async function addTask({ toDo, userInfo, isImportant }) {
     const task = toDo
     try {
         const result = await axios.post(`http://localhost:5000/addTodo?author=${userName}`, { task, isImportant }, { headers: { "authorization": `Bearer ${token}` } });
-        console.log(result)
+
     } catch (error) {
         console.log(error)
     }
@@ -85,7 +85,7 @@ export async function getTodoList({ userInfo }) {
         const result = await axios.get(`http://localhost:5000/getAllTask?author=${userName}`, { headers: { "authorization": `Bearer ${token}` } });
         return result;
     } catch (error) {
-        console.log(error)
+        return error;
 
     }
 }
@@ -95,7 +95,7 @@ export async function updateTodo({ task }) {
 
     try {
         const result = await axios.put(`http://localhost:5000/updateTask?taskId=${_id}`, { rest })
-        console.log(result)
+
     } catch (err) {
         console.log(err)
     }
@@ -106,8 +106,24 @@ export async function deleteTodo(taskId) {
 
     try {
         const result = await axios.delete(`http://localhost:5000/deleteTask?taskId=${_id}`)
-        console.log(result);
+
     } catch (error) {
         console.log(error);
     }
+}
+// search the todo function 
+export async function searchTodo(query) {
+
+    if (query.length >= 1) {
+
+        try {
+            const result = await axios.get(`http://localhost:5000/searchTodo?todo=${query}`)
+            return result;
+
+        } catch (error) {
+
+            return error.response;
+        }
+    }
+
 }

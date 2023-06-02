@@ -9,6 +9,7 @@ router.post('/addTodo', authMiddleware.Auth, taskController.addTask);
 
 // get routes
 router.get('/getAllTask', authMiddleware.Auth, taskController.getAllTask);
+router.get('/searchTodo', taskController.searchTodo)
 
 // Put routes
 router.put('/updateTask', taskController.updateTask)

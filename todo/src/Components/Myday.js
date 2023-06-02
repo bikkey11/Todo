@@ -21,16 +21,18 @@ export const Myday = () => {
   const [toDo, setTodo] = useState("");
 
   // to add the todo
-  const submitHandler = async () => {
+  const submitHandler = async (e) => {
+    e.preventDefault();
     await addTask({ toDo, userInfo });
+    window.location.reload(true)
   }
 
   // get all the taskList
   const getTaskList = async () => {
     const res = await getTodoList({ userInfo })
-    const todo = res.data;
 
-    if (res.status === 200) {
+    if (res?.status === 200) {
+      const todo = res.data;
       const task = [];
       for (let i = 0; i < todo.length; i++) {
         if (todo[i].isCompleted == false) {
@@ -44,7 +46,7 @@ export const Myday = () => {
   useEffect(() => {
     getTaskList();
 
-  }, [submitHandler, getTaskList])
+  }, [])
 
 
 
@@ -96,14 +98,13 @@ export const Myday = () => {
         {
           taskList.map(task => (
             <>
-              <div className='showTask flex items-center gap-2 p-2 border  rounded-md justify-between ' key={task.id}>
+              <div key={task._id} className='showTask flex items-center gap-2 p-2 border  rounded-md justify-between '>
                 <div className='flex gap-4'>
                   <div className="flex items-center mr-4 cursor-pointer"
                     onClick={async () => {
-
                       task.isCompleted = !task.isCompleted
                       await updateTodo({ task });
-                      // await getTaskList();
+                      window.location.reload(true)  
                     }}
                   >
                     <GrCheckbox> </GrCheckbox>
@@ -116,7 +117,8 @@ export const Myday = () => {
                 <div className='flex gap-4'>
                   <AiFillDelete className='cursor-pointer '
                     onClick={async () => {
-                      await deleteTodo(task._id)
+                      await deleteTodo(task._id);
+                      window.location.reload(true)  
                     }}
                   ></AiFillDelete>
                   {
@@ -125,19 +127,18 @@ export const Myday = () => {
                         onClick={async () => {
                           task.isImportant = !task.isImportant;
                           await updateTodo({ task });
+                      window.location.reload(true)  
                         }}>
                       </AiFillStar> :
                       <AiOutlineStar className='cursor-pointer '
                         onClick={async () => {
                           task.isImportant = !task.isImportant;
                           await updateTodo({ task });
-                          await getTaskList();
+                      window.location.reload(true)  
                         }}
                       ></AiOutlineStar>
                   }
                 </div>
-
-
               </div>
             </>
           ))

@@ -1,5 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const taskModel = require("../Models/taskSchema");
+const { query } = require("express");
 
 // Add todo task in todoList
 const addTask = async (req, res) => {
@@ -66,4 +67,25 @@ const deleteTodo = async (req, res) => {
     }
 }
 
-module.exports = { addTask, getAllTask, updateTask,deleteTodo };
+
+// search for the task in the taskList
+const searchTodo = async (req, res) => {
+    let query = req.query.todo;
+    
+    try {
+        await taskModel.find({ task: { $regex: query } }).then(data => {
+            if (data.length == 0) {
+            return
+            }
+            res.status(200).send(data)
+
+        }).catch(err => {
+            res.status(404).send(err.message)
+        })
+    } catch (error) {
+        res.status(500).send(error)
+
+    }
+}
+
+module.exports = { addTask, getAllTask, updateTask, deleteTodo, searchTodo };
